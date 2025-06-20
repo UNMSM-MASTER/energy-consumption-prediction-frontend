@@ -1,6 +1,6 @@
 <template>
   <AuthenticatedLayout>
-    <div class="space-y-6">
+    <div class="flex flex-col gap-6">
       <!-- Header -->
       <div class="flex justify-between items-center">
         <div>
@@ -76,7 +76,7 @@
         </CardHeader>
         <CardContent>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            <div class="space-y-2">
+            <div class="flex flex-col gap-2">
               <Label for="state">Estado</Label>
               <!-- Simple Select, replace with shadcn-vue Select when available -->
               <select id="state" v-model="selectedState" class="w-full border rounded-md p-2">
@@ -90,7 +90,7 @@
                 </option>
               </select>
             </div>
-            <div class="space-y-2">
+            <div class="flex flex-col gap-2">
               <Label for="period">Período</Label>
               <select id="period" v-model="selectedPeriod" class="w-full border rounded-md p-2">
                 <option value="1998-2018">1998-2018 (Completo)</option>
@@ -99,7 +99,7 @@
                 <option value="2015-2018">2015-2018 (Reciente)</option>
               </select>
             </div>
-            <div class="space-y-2">
+            <div class="flex flex-col gap-2">
               <Label>Acción</Label>
               <Button @click="handleAnalysis" :disabled="isAnalyzing" class="w-full">
                 <template v-if="isAnalyzing">
@@ -113,7 +113,7 @@
               </Button>
             </div>
           </div>
-          <div v-if="isAnalyzing" class="space-y-2">
+          <div v-if="isAnalyzing" class="flex flex-col gap-2">
             <div class="flex justify-between text-sm">
               <span>Progreso del análisis</span>
               <span>{{ analysisProgress }}%</span>
