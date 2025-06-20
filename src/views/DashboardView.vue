@@ -69,13 +69,6 @@ const quickActions = [
     href: '/exploratory-analysis',
     color: 'bg-blue-50 hover:bg-blue-100 border-blue-200',
   },
-  {
-    title: 'Predicción',
-    description: 'Predicción de consumo energético',
-    icon: TrendingUp,
-    href: '/prediction',
-    color: 'bg-green-50 hover:bg-green-100 border-green-200',
-  },
 ]
 
 const navigateTo = (href: string) => {
