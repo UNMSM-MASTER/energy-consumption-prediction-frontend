@@ -199,12 +199,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-
-interface UserData {
-  username: string
-  role: string
-  lastLogin: string
-}
+import { useAuthStore } from '@/stores/auth'
 
 interface Props {
   pageTitle?: string
@@ -218,6 +213,7 @@ withDefaults(defineProps<Props>(), {
 
 const router = useRouter()
 const route = useRoute()
+const authStore = useAuthStore()
 
 // Reactive state
 const sidebarOpen = ref(false)
@@ -230,10 +226,7 @@ const navigation = [
 ]
 
 // Computed properties
-const userData = computed<UserData | null>(() => {
-  const stored = localStorage.getItem('user_data')
-  return stored ? JSON.parse(stored) : null
-})
+const userData = computed(() => authStore.user)
 
 const breadcrumbs = computed(() => {
   const pathSegments = route.path.split('/').filter(Boolean)
@@ -269,9 +262,7 @@ const navigateToSettings = () => {
 }
 
 const handleLogout = () => {
-  localStorage.removeItem('auth_token')
-  localStorage.removeItem('user_data')
-  router.push('/login')
+  authStore.logout()
 }
 
 // Auto logout functionality
