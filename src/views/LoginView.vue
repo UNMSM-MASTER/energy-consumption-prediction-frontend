@@ -16,7 +16,7 @@
       <div class="bg-white rounded-lg shadow-lg p-6">
         <div class="space-y-1 mb-6">
           <h2 class="text-2xl font-semibold text-center">Iniciar Sesión</h2>
-          <p class="text-sm text-gray-600 text-center">Ingrese sus credenciales institucionales</p>
+          <p class="text-sm text-gray-600 text-center">Ingrese sus credenciales</p>
         </div>
 
         <form @submit.prevent="handleLogin" class="flex flex-col gap-4">
@@ -25,9 +25,9 @@
             <Input
               id="username"
               type="text"
-              placeholder="usuario@unmsm.edu.pe"
+              placeholder="usuario"
               v-model="credentials.username"
-              :disabled="isBlocked || isLoading"
+              :disabled="isLoading"
               required
               class="w-full"
             />
@@ -41,7 +41,7 @@
                 :type="showPassword ? 'text' : 'password'"
                 placeholder="••••••••"
                 v-model="credentials.password"
-                :disabled="isBlocked || isLoading"
+                :disabled="isLoading"
                 required
                 class="w-full pr-10"
               />
@@ -50,7 +50,7 @@
                 variant="ghost"
                 size="icon"
                 @click="togglePassword"
-                :disabled="isBlocked || isLoading"
+                :disabled="isLoading"
                 class="absolute right-0 top-0 h-full px-3 py-2 text-gray-400 hover:text-gray-600"
               >
                 <Eye v-if="!showPassword" class="h-4 w-4" />
@@ -66,28 +66,36 @@
             </div>
           </div>
 
-          <Button type="submit" :disabled="isBlocked || isLoading" class="w-full mt-4" size="lg">
+          <Button type="submit" :disabled="isLoading" class="w-full mt-4" size="lg">
             {{ isLoading ? 'Autenticando...' : 'Iniciar Sesión' }}
           </Button>
         </form>
-      </div>
 
-      <div class="text-center mt-6 text-xs text-gray-500">
-        <p>Demo: usuario: admin, contraseña: admin123</p>
+        <div class="mt-6 text-center">
+          <p class="text-sm text-gray-600">
+            ¿No tiene una cuenta?
+            <router-link to="/register" class="text-blue-600 hover:text-blue-800 font-medium">
+              Registrarse
+            </router-link>
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
-import { useRouter } from 'vue-router'
-import { Eye, EyeOff, Shield, AlertTriangle } from 'lucide-vue-next'
+import { ref, reactive, computed, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { Eye, EyeOff, AlertTriangle } from 'lucide-vue-next'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
+const route = useRoute()
+const authStore = useAuthStore()
 
 // Reactive state
 const showPassword = ref(false)
@@ -95,10 +103,10 @@ const credentials = reactive({
   username: '',
   password: '',
 })
-const attempts = ref(0)
-const isBlocked = ref(false)
-const isLoading = ref(false)
-const error = ref('')
+
+// Computed properties
+const isLoading = computed(() => authStore.isLoading)
+const error = computed(() => authStore.error)
 
 // Methods
 const togglePassword = () => {
@@ -106,43 +114,19 @@ const togglePassword = () => {
 }
 
 const handleLogin = async () => {
-  if (isBlocked.value) {
-    error.value = 'Cuenta bloqueada por múltiples intentos fallidos. Contacte al administrador.'
-    return
+  const success = await authStore.login(credentials)
+
+  if (success) {
+    // Redirect to intended page or dashboard
+    const redirectPath = (route.query.redirect as string) || '/dashboard'
+    router.push(redirectPath)
   }
-
-  isLoading.value = true
-  error.value = ''
-
-  // Simulate authentication with Active Directory
-  setTimeout(() => {
-    if (credentials.username === 'admin' && credentials.password === 'admin123') {
-      // Successful login
-      localStorage.setItem('auth_token', 'mock_token_' + Date.now())
-      localStorage.setItem(
-        'user_data',
-        JSON.stringify({
-          username: credentials.username,
-          role: 'Analista de Datos',
-          lastLogin: new Date().toISOString(),
-        }),
-      )
-      router.push('/dashboard')
-    } else {
-      // Failed login
-      const newAttempts = attempts.value + 1
-      attempts.value = newAttempts
-
-      if (newAttempts >= 5) {
-        isBlocked.value = true
-        error.value = 'Cuenta bloqueada por exceder el límite de intentos (5 máximo)'
-      } else {
-        error.value = `Credenciales incorrectas. Intentos restantes: ${5 - newAttempts}`
-      }
-    }
-    isLoading.value = false
-  }, 1500)
 }
+
+// Clear error when component mounts
+onMounted(() => {
+  authStore.clearError()
+})
 </script>
 
 <style scoped>
