@@ -4,12 +4,11 @@
       <!-- Header -->
       <div class="flex justify-between items-center">
         <div>
-          <h1 class="text-3xl font-bold">Análisis Exploratorio de Datos</h1>
-          <p class="text-gray-600">Datos históricos de consumo energético 1998-2018</p>
+          <h1 class="text-3xl font-bold text-slate-900">Análisis Exploratorio de Datos</h1>
+          <p class="text-slate-600">Datos históricos de consumo energético 1998-2018</p>
         </div>
-        <Button @click="goToVisualizations" variant="outline">
-          <BarChart3 class="mr-2 h-4 w-4" />
-          Ver Visualizaciones
+        <Button @click="router.push('/visualizations')" class="w-full sm:w-auto">
+          Ver Predicciones
         </Button>
       </div>
 
@@ -17,7 +16,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
         <Card>
           <CardHeader class="pb-2">
-            <CardTitle class="text-sm font-medium text-gray-600">Total Registros</CardTitle>
+            <CardTitle class="text-sm font-medium text-slate-600">Total Registros</CardTitle>
           </CardHeader>
           <CardContent>
             <div class="text-2xl font-bold">{{ datasetStats.totalRecords }}</div>
@@ -25,7 +24,7 @@
         </Card>
         <Card>
           <CardHeader class="pb-2">
-            <CardTitle class="text-sm font-medium text-gray-600">Compañías</CardTitle>
+            <CardTitle class="text-sm font-medium text-slate-600">Compañías</CardTitle>
           </CardHeader>
           <CardContent>
             <div class="text-2xl font-bold">{{ datasetStats.states }}</div>
@@ -33,7 +32,7 @@
         </Card>
         <Card>
           <CardHeader class="pb-2">
-            <CardTitle class="text-sm font-medium text-gray-600">Años</CardTitle>
+            <CardTitle class="text-sm font-medium text-slate-600">Años</CardTitle>
           </CardHeader>
           <CardContent>
             <div class="text-2xl font-bold">{{ datasetStats.years }}</div>
@@ -112,9 +111,9 @@
           </div>
           <div
             v-if="formattedDateTime"
-            class="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-md"
+            class="mt-4 p-3 bg-slate-50 border border-slate-200 rounded-md"
           >
-            <div class="text-sm text-blue-700">
+            <div class="text-sm text-slate-700">
               <strong>Fecha y hora seleccionada:</strong> {{ formattedDateTime }}
             </div>
           </div>
@@ -124,9 +123,9 @@
               <span>{{ analysisProgress }}%</span>
             </div>
             <!-- Simple progress bar, replace with shadcn-vue Progress when available -->
-            <div class="w-full bg-gray-200 rounded-full h-2.5">
+            <div class="w-full bg-slate-200 rounded-full h-2.5">
               <div
-                class="bg-blue-600 h-2.5 rounded-full"
+                class="bg-unmsm-slate h-2.5 rounded-full"
                 :style="{ width: analysisProgress + '%' }"
               ></div>
             </div>
@@ -143,59 +142,71 @@
               v-for="tab in tabs"
               :key="tab.value"
               @click="activeTab = tab.value"
-              :class="[
+                              :class="[
                 'py-2 px-4 text-sm font-medium',
                 activeTab === tab.value
-                  ? 'border-b-2 border-blue-600 text-blue-600'
-                  : 'text-gray-600',
+                  ? 'border-b-2 border-unmsm-slate text-unmsm-slate'
+                  : 'text-slate-600',
               ]"
             >
               {{ tab.label }}
             </button>
           </div>
         </div>
-        <div v-if="activeTab === 'analysis'" class="space-y-4">
+        <div v-if="activeTab === 'analysis'" class="flex flex-col gap-4">
           <!-- Prediction Results -->
           <Card v-if="predictionData">
             <CardHeader>
-              <CardTitle class="flex items-center gap-2">
-                <BarChart3 class="h-5 w-5" />
-                Resultados de Predicción
-              </CardTitle>
-              <CardDescription>
-                Predicción de consumo energético para {{ predictionData.input_data.company }} el
-                {{ new Date(predictionData.input_data.datetime).toLocaleString('es-ES') }}
-              </CardDescription>
+              <div class="flex items-center justify-between">
+                <div>
+                  <CardTitle class="flex items-center gap-2">
+                    <BarChart3 class="h-5 w-5" />
+                    Resultados de Predicción
+                  </CardTitle>
+                  <CardDescription>
+                    Predicción de consumo energético para {{ predictionData.input_data.company }} el
+                    {{ new Date(predictionData.input_data.datetime).toLocaleString('es-ES') }}
+                  </CardDescription>
+                </div>
+                <Button 
+                  @click="exportToPDF" 
+                  variant="outline" 
+                  class="flex items-center gap-2"
+                >
+                  <FileText class="h-4 w-4" />
+                  Exportar PDF
+                </Button>
+              </div>
             </CardHeader>
             <CardContent>
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Main Prediction -->
                 <div
-                  class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border border-blue-200"
+                  class="bg-gradient-to-br from-slate-50 to-slate-100 p-6 rounded-lg border border-slate-200"
                 >
-                  <div class="text-sm text-blue-600 font-medium mb-2">Predicción Principal</div>
-                  <div class="text-3xl font-bold text-blue-900">
+                  <div class="text-sm text-unmsm-slate font-medium mb-2">Predicción Principal</div>
+                  <div class="text-3xl font-bold text-slate-900">
                     {{ predictionData.prediction.toFixed(0) }}
                   </div>
-                  <div class="text-sm text-blue-700">GWh</div>
+                  <div class="text-sm text-slate-700">GWh</div>
                 </div>
 
                 <!-- Input Data -->
-                <div class="bg-gray-50 p-6 rounded-lg border">
-                  <div class="text-sm text-gray-600 font-medium mb-2">Datos de Entrada</div>
+                <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                  <div class="text-sm text-slate-600 font-medium mb-2">Datos de Entrada</div>
                   <div class="space-y-2 text-sm">
                     <div class="flex justify-between">
-                      <span class="text-gray-600">Compañía:</span>
+                      <span class="text-slate-600">Compañía:</span>
                       <span class="font-medium">{{ predictionData.input_data.company }}</span>
                     </div>
                     <div class="flex justify-between">
-                      <span class="text-gray-600">Fecha:</span>
+                      <span class="text-slate-600">Fecha:</span>
                       <span class="font-medium">{{
                         new Date(predictionData.input_data.datetime).toLocaleDateString('es-ES')
                       }}</span>
                     </div>
                     <div class="flex justify-between">
-                      <span class="text-gray-600">Hora:</span>
+                      <span class="text-slate-600">Hora:</span>
                       <span class="font-medium">{{
                         new Date(predictionData.input_data.datetime).toLocaleTimeString('es-ES', {
                           hour: '2-digit',
@@ -207,33 +218,33 @@
                 </div>
 
                 <!-- Features -->
-                <div class="bg-gray-50 p-6 rounded-lg border">
-                  <div class="text-sm text-gray-600 font-medium mb-2">Características</div>
+                <div class="bg-slate-50 p-6 rounded-lg border border-slate-200">
+                  <div class="text-sm text-slate-600 font-medium mb-2">Características</div>
                   <div class="space-y-2 text-sm">
                     <div class="flex justify-between">
-                      <span class="text-gray-600">Hora:</span>
+                      <span class="text-slate-600">Hora:</span>
                       <span class="font-medium">{{ predictionData.parsed_features.hour }}:00</span>
                     </div>
                     <div class="flex justify-between">
-                      <span class="text-gray-600">Día de semana:</span>
+                      <span class="text-slate-600">Día de semana:</span>
                       <span class="font-medium">{{
                         formatDayOfWeek(predictionData.parsed_features.dayofweek)
                       }}</span>
                     </div>
                     <div class="flex justify-between">
-                      <span class="text-gray-600">Mes:</span>
+                      <span class="text-slate-600">Mes:</span>
                       <span class="font-medium">{{
                         months[predictionData.parsed_features.month - 1]?.label
                       }}</span>
                     </div>
                     <div class="flex justify-between">
-                      <span class="text-gray-600">Fin de semana:</span>
+                      <span class="text-slate-600">Fin de semana:</span>
                       <span class="font-medium">{{
                         predictionData.parsed_features.is_weekend ? 'Sí' : 'No'
                       }}</span>
                     </div>
                     <div class="flex justify-between">
-                      <span class="text-gray-600">Hora pico:</span>
+                      <span class="text-slate-600">Hora pico:</span>
                       <span class="font-medium">{{
                         predictionData.parsed_features.is_peak ? 'Sí' : 'No'
                       }}</span>
@@ -246,32 +257,32 @@
               <div class="mt-6">
                 <h4 class="text-lg font-semibold mb-4">Valores de Lag (Histórico)</h4>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div class="bg-orange-50 p-4 rounded-lg border border-orange-200">
-                    <div class="text-sm text-orange-600 font-medium mb-1">
+                  <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <div class="text-sm text-slate-600 font-medium mb-1">
                       Lag 1 (Hora anterior)
                     </div>
-                    <div class="text-xl font-bold text-orange-900">
+                    <div class="text-xl font-bold text-slate-900">
                       {{ predictionData.parsed_features.lag_1.toFixed(0) }}
                     </div>
-                    <div class="text-sm text-orange-700">GWh</div>
+                    <div class="text-sm text-slate-700">GWh</div>
                   </div>
-                  <div class="bg-orange-50 p-4 rounded-lg border border-orange-200">
-                    <div class="text-sm text-orange-600 font-medium mb-1">
+                  <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <div class="text-sm text-slate-600 font-medium mb-1">
                       Lag 2 (2 horas antes)
                     </div>
-                    <div class="text-xl font-bold text-orange-900">
+                    <div class="text-xl font-bold text-slate-900">
                       {{ predictionData.parsed_features.lag_2.toFixed(0) }}
                     </div>
-                    <div class="text-sm text-orange-700">GWh</div>
+                    <div class="text-sm text-slate-700">GWh</div>
                   </div>
-                  <div class="bg-orange-50 p-4 rounded-lg border border-orange-200">
-                    <div class="text-sm text-orange-600 font-medium mb-1">
+                  <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <div class="text-sm text-slate-600 font-medium mb-1">
                       Lag 3 (3 horas antes)
                     </div>
-                    <div class="text-xl font-bold text-orange-900">
+                    <div class="text-xl font-bold text-slate-900">
                       {{ predictionData.parsed_features.lag_3.toFixed(0) }}
                     </div>
-                    <div class="text-sm text-orange-700">GWh</div>
+                    <div class="text-sm text-slate-700">GWh</div>
                   </div>
                 </div>
               </div>
@@ -331,7 +342,9 @@ import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
-import { BarChart3, Settings, Loader2 } from 'lucide-vue-next'
+import { BarChart3, Settings, Loader2, FileText } from 'lucide-vue-next'
+import jsPDF from 'jspdf'
+import html2canvas from 'html2canvas'
 import { useAuthStore } from '@/stores/auth'
 import { apiRequest } from '@/lib/api'
 
@@ -479,7 +492,8 @@ function handleAnalysis() {
       }
 
       console.log('Prediction response:', response.data)
-      predictionData.value = response.data
+      // Type assertion to ensure correct type
+      predictionData.value = response.data as typeof predictionData.value
       analysisProgress.value = 100
       isAnalyzing.value = false
       analysisComplete.value = true
@@ -489,6 +503,197 @@ function handleAnalysis() {
       isAnalyzing.value = false
       // Handle error - you might want to show an error message to the user
     })
+}
+
+const exportToPDF = async () => {
+  if (!predictionData.value) return
+
+  try {
+    // Create a temporary iframe to isolate styles completely
+    const iframe = document.createElement('iframe')
+    iframe.style.position = 'absolute'
+    iframe.style.left = '-9999px'
+    iframe.style.top = '0'
+    iframe.style.width = '800px'
+    iframe.style.height = '1200px'
+    iframe.style.border = 'none'
+    
+    document.body.appendChild(iframe)
+    
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document
+    if (!iframeDoc) throw new Error('Could not access iframe document')
+    
+    // Create a clean container inside the iframe
+    const pdfContainer = iframeDoc.createElement('div')
+    pdfContainer.style.width = '100%'
+    pdfContainer.style.backgroundColor = '#ffffff'
+    pdfContainer.style.padding = '20px'
+    pdfContainer.style.fontFamily = 'Arial, sans-serif'
+    pdfContainer.style.color = '#000000'
+    pdfContainer.style.fontSize = '14px'
+    pdfContainer.style.lineHeight = '1.5'
+    
+    // Add header
+    const header = document.createElement('div')
+    header.innerHTML = `
+      <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid #475569; padding-bottom: 20px;">
+        <h1 style="color: #1e293b; font-size: 24px; margin: 0; font-weight: bold;">Sistema de Predicción de Consumo Energético</h1>
+        <h2 style="color: #475569; font-size: 18px; margin: 10px 0 0 0;">Análisis Exploratorio de Datos</h2>
+        <p style="color: #64748b; font-size: 14px; margin: 5px 0 0 0;">Generado el: ${new Date().toLocaleString('es-ES')}</p>
+      </div>
+    `
+    pdfContainer.appendChild(header)
+    
+    // Add analysis parameters
+    const paramsInfo = document.createElement('div')
+    paramsInfo.innerHTML = `
+      <div style="margin-bottom: 20px; padding: 15px; background-color: #f8fafc; border-radius: 8px; border-left: 4px solid #475569;">
+        <h3 style="color: #1e293b; font-size: 16px; margin: 0 0 10px 0;">Parámetros del Análisis</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 14px;">
+          <div><strong>Compañía:</strong> ${predictionData.value.input_data.company}</div>
+          <div><strong>Fecha y Hora:</strong> ${new Date(predictionData.value.input_data.datetime).toLocaleString('es-ES')}</div>
+          <div><strong>Método de Predicción:</strong> ${predictionData.value.prediction_meta.forecast_method}</div>
+          <div><strong>Pasos de Predicción:</strong> ${predictionData.value.prediction_meta.steps}</div>
+        </div>
+      </div>
+    `
+    pdfContainer.appendChild(paramsInfo)
+    
+    // Add main prediction result
+    const predictionResult = document.createElement('div')
+    predictionResult.innerHTML = `
+      <div style="margin-bottom: 20px; padding: 20px; background-color: #f0f9ff; border-radius: 8px; border: 2px solid #0ea5e9;">
+        <h3 style="color: #1e293b; font-size: 18px; margin: 0 0 15px 0; text-align: center;">Resultado de la Predicción</h3>
+        <div style="text-align: center;">
+          <div style="font-size: 36px; font-weight: bold; color: #059669; margin-bottom: 5px;">
+            ${predictionData.value.prediction.toFixed(2)}
+          </div>
+          <div style="font-size: 16px; color: #64748b;">Gigawatts por Hora (GWh)</div>
+        </div>
+      </div>
+    `
+    pdfContainer.appendChild(predictionResult)
+    
+    // Add parsed features
+    const featuresInfo = document.createElement('div')
+    featuresInfo.innerHTML = `
+      <div style="margin-bottom: 20px;">
+        <h3 style="color: #1e293b; font-size: 16px; margin: 0 0 15px 0;">Características Extraídas</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 14px;">
+          <div style="padding: 8px; background-color: #f8fafc; border-radius: 4px;">
+            <strong>Hora:</strong> ${predictionData.value.parsed_features.hour}:00
+          </div>
+          <div style="padding: 8px; background-color: #f8fafc; border-radius: 4px;">
+            <strong>Día de la semana:</strong> ${formatDayOfWeek(predictionData.value.parsed_features.dayofweek)}
+          </div>
+          <div style="padding: 8px; background-color: #f8fafc; border-radius: 4px;">
+            <strong>Mes:</strong> ${predictionData.value.parsed_features.month}
+          </div>
+          <div style="padding: 8px; background-color: #f8fafc; border-radius: 4px;">
+            <strong>Año:</strong> ${predictionData.value.parsed_features.year}
+          </div>
+          <div style="padding: 8px; background-color: #f8fafc; border-radius: 4px;">
+            <strong>Es fin de semana:</strong> ${predictionData.value.parsed_features.is_weekend ? 'Sí' : 'No'}
+          </div>
+          <div style="padding: 8px; background-color: #f8fafc; border-radius: 4px;">
+            <strong>Es hora pico:</strong> ${predictionData.value.parsed_features.is_peak ? 'Sí' : 'No'}
+          </div>
+        </div>
+      </div>
+    `
+    pdfContainer.appendChild(featuresInfo)
+    
+    // Add lag values
+    const lagInfo = document.createElement('div')
+    lagInfo.innerHTML = `
+      <div style="margin-bottom: 20px;">
+        <h3 style="color: #1e293b; font-size: 16px; margin: 0 0 15px 0;">Valores de Lag Utilizados</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; font-size: 14px;">
+          <div style="padding: 12px; background-color: #f0f9ff; border-radius: 6px; text-align: center;">
+            <div style="font-weight: bold; color: #0ea5e9;">Lag 1</div>
+            <div style="font-size: 18px; font-weight: bold; color: #1e293b;">${predictionData.value.prediction_meta.last_real_lag_1.toFixed(2)}</div>
+          </div>
+          <div style="padding: 12px; background-color: #f0f9ff; border-radius: 6px; text-align: center;">
+            <div style="font-weight: bold; color: #0ea5e9;">Lag 2</div>
+            <div style="font-size: 18px; font-weight: bold; color: #1e293b;">${predictionData.value.prediction_meta.last_real_lag_2.toFixed(2)}</div>
+          </div>
+          <div style="padding: 12px; background-color: #f0f9ff; border-radius: 6px; text-align: center;">
+            <div style="font-weight: bold; color: #0ea5e9;">Lag 3</div>
+            <div style="font-size: 18px; font-weight: bold; color: #1e293b;">${predictionData.value.prediction_meta.last_real_lag_3.toFixed(2)}</div>
+          </div>
+        </div>
+      </div>
+    `
+    pdfContainer.appendChild(lagInfo)
+    
+    // Add metadata
+    const metadata = document.createElement('div')
+    metadata.innerHTML = `
+      <div style="margin-bottom: 20px; padding: 15px; background-color: #fef3c7; border-radius: 8px; border-left: 4px solid #f59e0b;">
+        <h3 style="color: #1e293b; font-size: 16px; margin: 0 0 10px 0;">Información del Análisis</h3>
+        <div style="font-size: 14px; color: #64748b;">
+          <p><strong>ID de Predicción:</strong> ${predictionData.value.prediction_id}</p>
+          <p><strong>Creado por:</strong> ${predictionData.value.created_by}</p>
+          <p><strong>Fecha de creación:</strong> ${new Date(predictionData.value.created_at).toLocaleString('es-ES')}</p>
+        </div>
+      </div>
+    `
+    pdfContainer.appendChild(metadata)
+    
+    // Add footer
+    const footer = document.createElement('div')
+    footer.innerHTML = `
+      <div style="margin-top: 30px; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+        <p style="color: #64748b; font-size: 12px; margin: 0;">© 2024 Universidad Nacional Mayor de San Marcos</p>
+        <p style="color: #64748b; font-size: 12px; margin: 5px 0 0 0;">Sistema de Predicción de Consumo Energético</p>
+      </div>
+    `
+    pdfContainer.appendChild(footer)
+    
+    // Add to iframe document
+    iframeDoc.body.appendChild(pdfContainer)
+    
+    // Convert to canvas
+    const canvas = await html2canvas(pdfContainer, {
+      scale: 2,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#ffffff',
+      logging: false,
+      removeContainer: true
+    })
+    
+    // Remove temporary iframe
+    document.body.removeChild(iframe)
+    
+    // Create PDF
+    const imgData = canvas.toDataURL('image/png')
+    const pdf = new jsPDF('p', 'mm', 'a4')
+    const imgWidth = 210
+    const pageHeight = 295
+    const imgHeight = (canvas.height * imgWidth) / canvas.width
+    let heightLeft = imgHeight
+    
+    let position = 0
+    
+    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
+    heightLeft -= pageHeight
+    
+    while (heightLeft >= 0) {
+      position = heightLeft - imgHeight
+      pdf.addPage()
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
+      heightLeft -= pageHeight
+    }
+    
+    // Save PDF
+    const fileName = `analisis_exploratorio_${predictionData.value.input_data.company}_${new Date(predictionData.value.input_data.datetime).toISOString().split('T')[0]}.pdf`
+    pdf.save(fileName)
+    
+  } catch (error) {
+    console.error('Error exporting to PDF:', error)
+    alert('Error al exportar el PDF. Intente nuevamente.')
+  }
 }
 
 onMounted(() => {

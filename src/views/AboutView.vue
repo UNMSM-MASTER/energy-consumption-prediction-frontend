@@ -4,20 +4,20 @@ import PublicLayout from '../layouts/PublicLayout.vue'
 
 <template>
   <PublicLayout>
-    <div class="max-w-4xl mx-auto space-y-8">
+    <div class="max-w-4xl mx-auto flex flex-col gap-8">
       <!-- Header -->
-      <div class="text-center space-y-4">
-        <h1 class="text-3xl font-bold text-gray-900">Acerca del Sistema</h1>
-        <p class="text-lg text-gray-600">
+      <div class="text-center flex flex-col gap-4">
+        <h1 class="text-3xl font-bold text-slate-900">Acerca del Sistema</h1>
+        <p class="text-lg text-slate-600">
           Conoce más sobre nuestra plataforma de predicción de consumo energético
         </p>
       </div>
 
       <!-- Mission Section -->
-      <div class="bg-white p-8 rounded-lg shadow-sm border">
-        <h2 class="text-2xl font-semibold text-gray-900 mb-4">Nuestra Misión</h2>
-        <p class="text-gray-700 leading-relaxed">
-          El Sistema de Predicción de Consumo Energético de OSINERGMIN tiene como objetivo
+      <div class="bg-white p-8 rounded-lg shadow-sm border border-slate-200">
+        <h2 class="text-2xl font-semibold text-slate-900 mb-4">Nuestra Misión</h2>
+        <p class="text-slate-700 leading-relaxed">
+          El Sistema de Predicción de Consumo Energético de la UNMSM tiene como objetivo
           proporcionar herramientas avanzadas de análisis y predicción para optimizar el consumo
           energético en las operaciones institucionales. Utilizamos tecnologías de inteligencia
           artificial y machine learning para ofrecer insights valiosos que permitan una gestión más
@@ -27,11 +27,11 @@ import PublicLayout from '../layouts/PublicLayout.vue'
 
       <!-- Features Grid -->
       <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-white p-6 rounded-lg shadow-sm border">
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Tecnología Avanzada</h3>
-          <ul class="space-y-2 text-gray-700">
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+          <h3 class="text-xl font-semibold text-slate-900 mb-3">Tecnología Avanzada</h3>
+          <ul class="flex flex-col gap-2 text-slate-700">
             <li class="flex items-center">
-              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-4 h-4 text-unmsm-slate mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
                   d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -41,7 +41,7 @@ import PublicLayout from '../layouts/PublicLayout.vue'
               Algoritmos de Machine Learning
             </li>
             <li class="flex items-center">
-              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-4 h-4 text-unmsm-slate mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
                   d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -51,23 +51,23 @@ import PublicLayout from '../layouts/PublicLayout.vue'
               Análisis Predictivo en Tiempo Real
             </li>
             <li class="flex items-center">
-              <svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-4 h-4 text-unmsm-slate mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
                   d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                   clip-rule="evenodd"
                 />
               </svg>
-              Visualizaciones Interactivas
+              Predicciones Interactivas
             </li>
           </ul>
         </div>
 
-        <div class="bg-white p-6 rounded-lg shadow-sm border">
-          <h3 class="text-xl font-semibold text-gray-900 mb-3">Beneficios</h3>
-          <ul class="space-y-2 text-gray-700">
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+          <h3 class="text-xl font-semibold text-slate-900 mb-3">Beneficios</h3>
+          <ul class="flex flex-col gap-2 text-slate-700">
             <li class="flex items-center">
-              <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-4 h-4 text-unmsm-slate mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
                   d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -77,7 +77,7 @@ import PublicLayout from '../layouts/PublicLayout.vue'
               Reducción de Costos Energéticos
             </li>
             <li class="flex items-center">
-              <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-4 h-4 text-unmsm-slate mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
                   d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -87,7 +87,7 @@ import PublicLayout from '../layouts/PublicLayout.vue'
               Mejora en la Eficiencia Operativa
             </li>
             <li class="flex items-center">
-              <svg class="w-4 h-4 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <svg class="w-4 h-4 text-unmsm-slate mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path
                   fill-rule="evenodd"
                   d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -101,15 +101,15 @@ import PublicLayout from '../layouts/PublicLayout.vue'
       </div>
 
       <!-- Team Section -->
-      <div class="bg-white p-8 rounded-lg shadow-sm border">
-        <h2 class="text-2xl font-semibold text-gray-900 mb-6">Equipo de Desarrollo</h2>
+      <div class="bg-white p-8 rounded-lg shadow-sm border border-slate-200">
+        <h2 class="text-2xl font-semibold text-slate-900 mb-6">Equipo de Desarrollo</h2>
         <div class="grid md:grid-cols-3 gap-6">
           <div class="text-center">
             <div
-              class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3"
+              class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3"
             >
               <svg
-                class="w-8 h-8 text-blue-600"
+                class="w-8 h-8 text-unmsm-slate"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -122,15 +122,15 @@ import PublicLayout from '../layouts/PublicLayout.vue'
                 />
               </svg>
             </div>
-            <h3 class="font-semibold text-gray-900">Ciencia de Datos</h3>
-            <p class="text-sm text-gray-600">Análisis y modelado predictivo</p>
+            <h3 class="font-semibold text-slate-900">Ciencia de Datos</h3>
+            <p class="text-sm text-slate-600">Análisis y modelado predictivo</p>
           </div>
           <div class="text-center">
             <div
-              class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3"
+              class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3"
             >
               <svg
-                class="w-8 h-8 text-green-600"
+                class="w-8 h-8 text-unmsm-slate"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -143,15 +143,15 @@ import PublicLayout from '../layouts/PublicLayout.vue'
                 />
               </svg>
             </div>
-            <h3 class="font-semibold text-gray-900">Desarrollo</h3>
-            <p class="text-sm text-gray-600">Ingeniería de software</p>
+            <h3 class="font-semibold text-slate-900">Desarrollo</h3>
+            <p class="text-sm text-slate-600">Ingeniería de software</p>
           </div>
           <div class="text-center">
             <div
-              class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3"
+              class="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-3"
             >
               <svg
-                class="w-8 h-8 text-purple-600"
+                class="w-8 h-8 text-unmsm-slate"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -164,27 +164,27 @@ import PublicLayout from '../layouts/PublicLayout.vue'
                 />
               </svg>
             </div>
-            <h3 class="font-semibold text-gray-900">UX/UI</h3>
-            <p class="text-sm text-gray-600">Experiencia de usuario</p>
+            <h3 class="font-semibold text-slate-900">UX/UI</h3>
+            <p class="text-sm text-slate-600">Experiencia de usuario</p>
           </div>
         </div>
       </div>
 
       <!-- Contact Section -->
-      <div class="bg-blue-50 p-8 rounded-lg border border-blue-200">
-        <h2 class="text-2xl font-semibold text-gray-900 mb-4">¿Necesitas Ayuda?</h2>
-        <p class="text-gray-700 mb-4">
+      <div class="bg-slate-50 p-8 rounded-lg border border-slate-200">
+        <h2 class="text-2xl font-semibold text-slate-900 mb-4">¿Necesitas Ayuda?</h2>
+        <p class="text-slate-700 mb-4">
           Si tienes preguntas sobre el sistema o necesitas soporte técnico, no dudes en
           contactarnos.
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
           <button
-            class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors"
+            class="bg-unmsm-slate text-white px-6 py-2 rounded-md hover:bg-unmsm-navy transition-colors"
           >
             Contactar Soporte
           </button>
           <button
-            class="border border-blue-600 text-blue-600 px-6 py-2 rounded-md hover:bg-blue-50 transition-colors"
+            class="border border-unmsm-slate text-unmsm-slate px-6 py-2 rounded-md hover:bg-slate-50 transition-colors"
           >
             Documentación
           </button>
