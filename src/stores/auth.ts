@@ -20,7 +20,6 @@ export const useAuthStore = defineStore('auth', () => {
 
   // Getters
   const isAuthenticated = computed(() => !!token.value && !!user.value)
-  const userRole = computed(() => user.value?.role || 'user')
 
   // Actions
   const login = async (credentials: LoginCredentials) => {
@@ -152,7 +151,6 @@ export const useAuthStore = defineStore('auth', () => {
 
     // Getters
     isAuthenticated,
-    userRole,
 
     // Actions
     login,
