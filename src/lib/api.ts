@@ -1,6 +1,11 @@
 // API Configuration
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000'
 
+// Validate API URL
+if (!API_BASE_URL) {
+  console.warn('VITE_API_BASE_URL not set, using default: http://127.0.0.1:8000')
+}
+
 export interface ApiResponse<T = unknown> {
   data?: T
   message?: string
@@ -24,7 +29,6 @@ export interface User {
   username: string
   email: string
   full_name?: string
-  role?: string
   is_active: boolean
   created_at: string
   updated_at: string
@@ -45,7 +49,7 @@ export const getAuthHeaders = () => {
   }
 }
 
-// API request helper
+// API request helper with improved error handling
 export const apiRequest = async <T>(
   endpoint: string,
   options: RequestInit = {},
@@ -139,6 +143,7 @@ export const apiRequest = async <T>(
       return { data }
     }
   } catch (error) {
+    console.error('API Request Error:', error)
     return {
       error: error instanceof Error ? error.message : 'Error desconocido',
     }
