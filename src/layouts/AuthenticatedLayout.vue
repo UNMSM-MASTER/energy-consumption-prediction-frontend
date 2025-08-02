@@ -1,5 +1,5 @@
 <template>
-  <div class="flex min-h-screen bg-gray-50">
+  <div class="flex min-h-screen bg-slate-50">
     <!-- Mobile sidebar backdrop -->
     <div
       v-if="sidebarOpen"
@@ -10,22 +10,17 @@
     <!-- Sidebar -->
     <aside
       :class="[
-        'fixed flex flex-col justify-between inset-y-0 left-0 z-50 w-64 bg-white shadow-xl border-r border-gray-200 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0',
+        'fixed flex flex-col justify-between inset-y-0 left-0 z-50 w-64 bg-white shadow-xl border-r border-slate-200 transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0',
         sidebarOpen ? 'translate-x-0' : '-translate-x-full',
       ]"
     >
       <!-- Logo Header -->
       <div
-        class="flex items-center justify-between h-16 px-6 border-b border-gray-200 bg-gradient-to-r from-blue-600 to-blue-700"
+        class="flex items-center justify-between h-16 px-6 border-b border-slate-200 bg-gradient-to-r from-unmsm-navy to-unmsm-slate"
       >
-        <div class="flex items-center space-x-3">
-          <!-- <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-            <div class="w-6 h-6 bg-blue-600 rounded hexagon flex items-center justify-center">
-              <span class="text-white text-xs font-bold">O</span>
-            </div>
-          </div> -->
+                  <div class="flex items-center gap-3">
           <div class="text-white">
-            <div class="text-xs text-blue-100 font-bold">
+            <div class="text-xs text-slate-600 font-bold">
               Sistema de Predicción de Consumo Energético
             </div>
           </div>
@@ -33,7 +28,7 @@
         <Button
           variant="ghost"
           size="sm"
-          class="lg:hidden text-white hover:bg-blue-800"
+          class="lg:hidden text-white hover:bg-slate-700"
           @click="closeSidebar"
         >
           <X class="h-4 w-4" />
@@ -41,7 +36,7 @@
       </div>
 
       <!-- Navigation -->
-      <nav class="flex-1 px-4 py-6 space-y-2">
+      <nav class="flex-1 px-4 py-6 flex flex-col gap-2">
         <Button
           v-for="item in navigation"
           :key="item.name"
@@ -49,8 +44,8 @@
           :class="[
             'w-full justify-start h-11 px-4',
             $route.path === item.href
-              ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-sm'
-              : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900',
+              ? 'bg-unmsm-slate text-white hover:bg-unmsm-navy shadow-sm'
+              : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900',
           ]"
           @click="navigateTo(item.href)"
         >
@@ -60,18 +55,17 @@
       </nav>
 
       <!-- User Profile Section -->
-      <div class="border-t border-gray-200 p-4">
-        <div class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50">
+      <div class="border-t border-slate-200 p-4">
+        <div class="flex items-center gap-3 p-3 rounded-lg bg-slate-50">
           <Avatar class="h-10 w-10">
-            <AvatarFallback class="bg-blue-600 text-white font-semibold">
+            <AvatarFallback class="bg-unmsm-slate text-white font-semibold">
               {{ userData?.username?.charAt(0).toUpperCase() || 'U' }}
             </AvatarFallback>
           </Avatar>
           <div class="flex-1 min-w-0">
-            <p class="text-sm font-semibold text-gray-900 truncate">
+            <p class="text-sm font-semibold text-slate-900 truncate">
               {{ userData?.username || 'Usuario' }}
             </p>
-            <p class="text-xs text-gray-500 truncate">{{ userData?.role || 'Rol' }}</p>
           </div>
         </div>
       </div>
@@ -80,13 +74,13 @@
     <!-- Main content -->
     <div class="lg:ml-64 flex-1">
       <!-- Top header -->
-      <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30">
+      <header class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-30">
         <div class="flex items-center justify-between h-16 px-6">
-          <div class="flex items-center space-x-4">
+          <div class="flex items-center gap-4">
             <Button
               variant="ghost"
               size="sm"
-              class="lg:hidden hover:bg-gray-100"
+              class="lg:hidden hover:bg-slate-100"
               @click="openSidebar"
             >
               <Menu class="h-5 w-5" />
@@ -112,13 +106,13 @@
             </Breadcrumb>
           </div>
 
-          <div class="flex items-center space-x-4">
+          <div class="flex items-center gap-4">
             <!-- User Dropdown -->
             <DropdownMenu v-model:open="userDropdownOpen">
               <DropdownMenuTrigger as-child>
-                <Button variant="ghost" class="relative h-10 w-10 rounded-full hover:bg-gray-100">
+                <Button variant="ghost" class="relative h-10 w-10 rounded-full hover:bg-slate-100">
                   <Avatar class="h-10 w-10">
-                    <AvatarFallback class="bg-blue-600 text-white font-semibold">
+                    <AvatarFallback class="bg-unmsm-slate text-white font-semibold">
                       {{ userData?.username?.charAt(0).toUpperCase() || 'U' }}
                     </AvatarFallback>
                   </Avatar>
@@ -126,11 +120,8 @@
               </DropdownMenuTrigger>
               <DropdownMenuContent class="w-56" align="end">
                 <div class="flex items-center justify-start gap-2 p-3">
-                  <div class="flex flex-col space-y-1 leading-none">
-                    <p class="font-semibold text-gray-900">{{ userData?.username || 'Usuario' }}</p>
-                    <p class="w-[200px] truncate text-sm text-gray-500">
-                      {{ userData?.role || 'Rol' }}
-                    </p>
+                  <div class="flex flex-col gap-1 leading-none">
+                    <p class="font-semibold text-slate-900">{{ userData?.username || 'Usuario' }}</p>
                   </div>
                 </div>
                 <DropdownMenuSeparator />
@@ -158,16 +149,16 @@
       </main>
 
       <!-- Footer -->
-      <footer class="bg-white border-t border-gray-200">
+      <footer class="bg-white border-t border-slate-200">
         <div class="px-6 py-4">
           <div
-            class="flex flex-col md:flex-row justify-between items-center space-y-2 md:space-y-0"
+            class="flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0"
           >
-            <div class="text-sm text-gray-600 font-medium">
+            <div class="text-sm text-slate-600 font-medium">
               © 2025 UNMSM - Universidad Nacional Mayor de San Marcos
             </div>
-            <div class="flex items-center space-x-4 text-sm text-gray-500">
-              <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+            <div class="flex items-center gap-4 text-sm text-slate-500">
+              <span class="bg-slate-100 text-slate-800 px-2 py-1 rounded-full text-xs font-medium">
                 Versión 1.0.0
               </span>
             </div>
@@ -190,7 +181,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Home, BarChart3, Settings, LogOut, Menu, X } from 'lucide-vue-next'
+import { Home, BarChart3, Settings, LogOut, Menu, X, Table } from 'lucide-vue-next'
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -223,6 +214,7 @@ const userDropdownOpen = ref(false)
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: Home },
   { name: 'Análisis Exploratorio', href: '/exploratory-analysis', icon: BarChart3 },
+  { name: 'Predicciones', href: '/visualizations', icon: Table },
 ]
 
 // Computed properties

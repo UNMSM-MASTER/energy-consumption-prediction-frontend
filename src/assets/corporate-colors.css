@@ -1,0 +1,175 @@
+/* Corporate Color Scheme - UNMSM Energy Prediction System */
+
+:root {
+  /* Primary Corporate Colors */
+  --unmsm-navy: #1e293b;        /* Dark navy blue - primary brand color */
+  --unmsm-slate: #475569;       /* Medium slate - secondary brand color */
+  --unmsm-gray: #64748b;        /* Light gray - accent color */
+  
+  /* Background Colors */
+  --bg-primary: #ffffff;        /* Main background */
+  --bg-secondary: #f8fafc;      /* Secondary background */
+  --bg-tertiary: #f1f5f9;      /* Tertiary background */
+  --bg-dark: #0f172a;          /* Dark background */
+  
+  /* Text Colors */
+  --text-primary: #1e293b;     /* Primary text */
+  --text-secondary: #475569;   /* Secondary text */
+  --text-muted: #64748b;       /* Muted text */
+  --text-light: #94a3b8;       /* Light text */
+  --text-white: #ffffff;       /* White text */
+  
+  /* Border Colors */
+  --border-primary: #e2e8f0;   /* Primary borders */
+  --border-secondary: #cbd5e1; /* Secondary borders */
+  --border-dark: #475569;      /* Dark borders */
+  
+  /* Status Colors */
+  --success: #059669;          /* Success green */
+  --warning: #d97706;          /* Warning orange */
+  --error: #dc2626;            /* Error red */
+  --info: #2563eb;             /* Info blue */
+  
+  /* Interactive Colors */
+  --hover-bg: #f1f5f9;         /* Hover background */
+  --active-bg: #e2e8f0;        /* Active background */
+  --focus-ring: #3b82f6;       /* Focus ring color */
+  
+  /* Shadow Colors */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Utility Classes for Corporate Colors */
+.text-unmsm-navy { color: var(--unmsm-navy); }
+.text-unmsm-slate { color: var(--unmsm-slate); }
+.text-unmsm-gray { color: var(--unmsm-gray); }
+
+.bg-unmsm-navy { background-color: var(--unmsm-navy); }
+.bg-unmsm-slate { background-color: var(--unmsm-slate); }
+.bg-unmsm-gray { background-color: var(--unmsm-gray); }
+
+.border-unmsm-navy { border-color: var(--unmsm-navy); }
+.border-unmsm-slate { border-color: var(--unmsm-slate); }
+.border-unmsm-gray { border-color: var(--unmsm-gray); }
+
+/* Gradient Utilities */
+.bg-gradient-corporate {
+  background: linear-gradient(135deg, var(--unmsm-navy) 0%, var(--unmsm-slate) 100%);
+}
+
+.bg-gradient-subtle {
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+}
+
+/* Professional Button Styles */
+.btn-corporate {
+  background-color: var(--unmsm-slate);
+  color: var(--text-white);
+  border: 1px solid var(--unmsm-slate);
+  transition: all 0.3s ease;
+}
+
+.btn-corporate:hover {
+  background-color: var(--unmsm-navy);
+  border-color: var(--unmsm-navy);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-corporate-outline {
+  background-color: transparent;
+  color: var(--unmsm-slate);
+  border: 2px solid var(--unmsm-slate);
+  transition: all 0.3s ease;
+}
+
+.btn-corporate-outline:hover {
+  background-color: var(--unmsm-slate);
+  color: var(--text-white);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Card Styles */
+.card-corporate {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.card-corporate:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Professional Typography */
+.text-corporate-heading {
+  color: var(--text-primary);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.text-corporate-body {
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.text-corporate-muted {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* Status Indicators */
+.status-success {
+  color: var(--success);
+  background-color: rgba(5, 150, 105, 0.1);
+}
+
+.status-warning {
+  color: var(--warning);
+  background-color: rgba(217, 119, 6, 0.1);
+}
+
+.status-error {
+  color: var(--error);
+  background-color: rgba(220, 38, 38, 0.1);
+}
+
+.status-info {
+  color: var(--info);
+  background-color: rgba(37, 99, 235, 0.1);
+}
+
+/* Focus States */
+.focus-corporate:focus {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Animation Utilities */
+.transition-corporate {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Professional Spacing */
+.space-corporate > * + * {
+  margin-top: 1.5rem;
+}
+
+.space-corporate-sm > * + * {
+  margin-top: 0.75rem;
+}
+
+.space-corporate-lg > * + * {
+  margin-top: 2rem;
+} 

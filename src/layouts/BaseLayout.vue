@@ -1,48 +1,47 @@
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen bg-slate-50">
     <!-- Header -->
-    <header v-if="showHeader" class="bg-white shadow-sm border-b">
+    <header v-if="showHeader" class="bg-white shadow-sm border-b border-slate-200">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <!-- Logo/Brand -->
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span class="text-white text-sm font-bold">O</span>
+              <div class="w-8 h-8 bg-unmsm-slate rounded-lg flex items-center justify-center shadow-sm">
+                <span class="text-white text-sm font-bold">U</span>
               </div>
             </div>
             <div class="ml-3">
-              <p class="text-xs text-gray-500">Sistema de Predicción</p>
+              <p class="text-xs text-slate-500 font-medium">Sistema de Predicción</p>
             </div>
           </div>
 
           <!-- Navigation -->
-          <nav v-if="showNav" class="hidden md:flex space-x-8">
+          <nav v-if="showNav" class="hidden md:flex gap-8">
             <router-link
               to="/"
-              class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              active-class="text-blue-600 bg-blue-50"
+              class="text-slate-700 hover:text-unmsm-slate px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              active-class="text-unmsm-slate bg-slate-100"
             >
               Inicio
             </router-link>
             <router-link
               to="/about"
-              class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-              active-class="text-blue-600 bg-blue-50"
+              class="text-slate-700 hover:text-unmsm-slate px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              active-class="text-unmsm-slate bg-slate-100"
             >
               Acerca de
             </router-link>
           </nav>
 
           <!-- User Menu -->
-          <div v-if="showUserMenu" class="flex items-center space-x-4">
-            <div class="text-sm text-gray-700">
+          <div v-if="showUserMenu" class="flex items-center gap-4">
+            <div class="text-sm text-slate-700">
               <span class="font-medium">{{ userData?.username || 'Usuario' }}</span>
-              <span class="text-gray-500 ml-2">{{ userData?.role || 'Rol' }}</span>
             </div>
             <button
               @click="handleLogout"
-              class="text-gray-700 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              class="text-slate-700 hover:text-red-600 px-3 py-2 rounded-md text-sm font-medium transition-colors"
             >
               Cerrar Sesión
             </button>
@@ -59,9 +58,9 @@
     </main>
 
     <!-- Footer -->
-    <footer v-if="showFooter" class="bg-white border-t mt-auto">
+    <footer v-if="showFooter" class="bg-white border-t border-slate-200 mt-auto">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div class="text-center text-sm text-gray-500">
+        <div class="text-center text-sm text-slate-500">
           <p>&copy; 2025 UNMSM - Universidad Nacional Mayor de San Marcos</p>
           <p class="mt-1">Sistema de Predicción de Consumo Energético.</p>
         </div>
@@ -76,7 +75,6 @@ import { useRouter } from 'vue-router'
 
 interface UserData {
   username: string
-  role: string
   lastLogin: string
 }
 

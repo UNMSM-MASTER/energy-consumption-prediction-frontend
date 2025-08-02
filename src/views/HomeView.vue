@@ -5,13 +5,13 @@ import PublicLayout from '../layouts/PublicLayout.vue'
 
 <template>
   <PublicLayout>
-    <div class="space-y-8">
+    <div class="flex flex-col gap-8">
       <!-- Hero Section -->
-      <div class="text-center space-y-4">
-        <h1 class="text-4xl font-bold text-gray-900">
+      <div class="text-center flex flex-col gap-4">
+        <h1 class="text-4xl font-bold text-slate-900">
           Sistema de Predicción de Consumo Energético
         </h1>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto">
           Plataforma avanzada para el análisis y predicción del consumo energético utilizando
           inteligencia artificial y machine learning.
         </p>
@@ -22,10 +22,10 @@ import PublicLayout from '../layouts/PublicLayout.vue'
 
       <!-- Features Section -->
       <div class="grid md:grid-cols-3 gap-8 mt-12">
-        <div class="bg-white p-6 rounded-lg shadow-sm border">
-          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center mb-4">
             <svg
-              class="w-6 h-6 text-blue-600"
+              class="w-6 h-6 text-unmsm-slate"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -38,17 +38,17 @@ import PublicLayout from '../layouts/PublicLayout.vue'
               />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Análisis Predictivo</h3>
-          <p class="text-gray-600">
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Análisis Predictivo</h3>
+          <p class="text-slate-600">
             Utilizamos algoritmos de machine learning avanzados para predecir patrones de consumo
             energético con alta precisión.
           </p>
         </div>
 
-        <div class="bg-white p-6 rounded-lg shadow-sm border">
-          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center mb-4">
             <svg
-              class="w-6 h-6 text-green-600"
+              class="w-6 h-6 text-unmsm-slate"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -61,17 +61,17 @@ import PublicLayout from '../layouts/PublicLayout.vue'
               />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Eficiencia Energética</h3>
-          <p class="text-gray-600">
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Eficiencia Energética</h3>
+          <p class="text-slate-600">
             Optimiza el consumo energético identificando oportunidades de mejora y reduciendo costos
             operativos.
           </p>
         </div>
 
-        <div class="bg-white p-6 rounded-lg shadow-sm border">
-          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+        <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center mb-4">
             <svg
-              class="w-6 h-6 text-purple-600"
+              class="w-6 h-6 text-unmsm-slate"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -84,10 +84,9 @@ import PublicLayout from '../layouts/PublicLayout.vue'
               />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Reportes Detallados</h3>
-          <p class="text-gray-600">
-            Genera reportes completos y visualizaciones interactivas para una mejor toma de
-            decisiones.
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">Predicciones Interactivas</h3>
+          <p class="text-slate-600">
+            Genera predicciones interactivas para una mejor toma de decisiones.
           </p>
         </div>
       </div>
