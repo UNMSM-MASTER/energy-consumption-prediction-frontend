@@ -7,7 +7,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/login',
+      redirect: '/dashboard',
     },
     {
       path: '/home',
@@ -41,6 +41,11 @@ const router = createRouter({
       path: '/exploratory-analysis',
       name: 'exploratory-analysis',
       component: () => import('../views/ExploratoryView.vue'),
+    },
+    {
+      path: '/visualizations',
+      name: 'visualizations',
+      component: () => import('../views/VisualizationsView.vue'),
     },
   ],
 })
