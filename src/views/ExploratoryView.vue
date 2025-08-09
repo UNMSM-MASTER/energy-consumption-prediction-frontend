@@ -253,6 +253,16 @@
                 </div>
               </div>
 
+              <!-- Comparison Chart: Lags vs Prediction (Chart.js) -->
+              <div class="mt-6">
+                <h4 class="text-lg font-semibold mb-4">Comparativo: Lags vs Predicción</h4>
+                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                  <div class="h-64">
+                    <Bar v-if="barData" :data="barData" :options="barOptions" />
+                  </div>
+                </div>
+              </div>
+
               <!-- Lag Values -->
               <div class="mt-6">
                 <h4 class="text-lg font-semibold mb-4">Valores de Lag (Histórico)</h4>
@@ -347,6 +357,11 @@ import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 import { useAuthStore } from '@/stores/auth'
 import { apiRequest } from '@/lib/api'
+// Chart.js
+import { Bar } from 'vue-chartjs'
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js'
+
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
 // Types
 interface ParsedFeatures {
@@ -398,6 +413,50 @@ const analysisComplete = ref(false)
 const activeTab = ref('analysis')
 const tabs = [{ value: 'analysis', label: 'Análisis' }]
 const predictionData = ref<PredictionData | null>(null)
+
+// Chart.js dataset and options
+const barData = computed<any>(() => {
+  if (!predictionData.value) return null
+  const { lag_1, lag_2, lag_3 } = predictionData.value.parsed_features
+  return {
+    labels: ['Lag 3', 'Lag 2', 'Lag 1', 'Predicción'],
+    datasets: [
+      {
+        label: 'GWh',
+        data: [lag_3, lag_2, lag_1, predictionData.value.prediction],
+        backgroundColor: ['#cbd5e1', '#94a3b8', '#64748b', '#10b981'],
+        borderColor: ['#94a3b8', '#64748b', '#475569', '#059669'],
+        borderWidth: 1,
+        borderRadius: 6,
+      },
+    ],
+  }
+})
+
+const barOptions = computed<any>(() => ({
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      display: true,
+      position: 'top' as const,
+      labels: { color: '#334155', font: { size: 12 } },
+    },
+    title: { display: false },
+    tooltip: { callbacks: { label: (ctx: any) => `${ctx.parsed.y.toFixed(0)} GWh` } },
+  },
+  scales: {
+    x: {
+      ticks: { color: '#475569', font: { size: 12 } },
+      grid: { display: false },
+    },
+    y: {
+      beginAtZero: true,
+      ticks: { color: '#64748b', font: { size: 11 } },
+      grid: { color: 'rgba(148, 163, 184, 0.2)' },
+    },
+  },
+}))
 
 // Data arrays for the form inputs
 const years = Array.from({ length: 3 }, (_, i) => 2018 + i)

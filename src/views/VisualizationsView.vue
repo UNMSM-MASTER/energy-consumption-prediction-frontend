@@ -17,6 +17,15 @@
             <FileText class="h-4 w-4" />
             Exportar PDF
           </Button>
+          <Button 
+            @click="exportToExcel" 
+            variant="outline" 
+            class="flex items-center gap-2"
+            :disabled="isLoading || filteredPredictions.length === 0"
+          >
+            <FileSpreadsheet class="h-4 w-4" />
+            Exportar Excel
+          </Button>
         </div>
       </div>
 
@@ -211,7 +220,9 @@ import {
   AlertTriangle,
   RefreshCw,
   FileText,
+  FileSpreadsheet,
 } from 'lucide-vue-next'
+import * as XLSX from 'xlsx'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 import { useAuthStore } from '@/stores/auth'
@@ -410,6 +421,40 @@ const clearFilters = () => {
   currentPage.value = 1
 }
 
+
+
+const exportToExcel = () => {
+  try {
+    const rows = filteredPredictions.value.map(p => ({
+      ID: p.prediction_id,
+      Empresa: p.input_data.company,
+      'Fecha/Hora': formatDateTime(p.input_data.datetime),
+      'Predicción (GWh)': Number(p.prediction.toFixed(2)),
+      'Creado por': p.created_by,
+      'Fecha de creación': formatDateTime(p.created_at),
+    }))
+
+    const worksheet = XLSX.utils.json_to_sheet(rows)
+    // Optional: set basic column widths
+    worksheet['!cols'] = [
+      { wch: 36 }, // ID
+      { wch: 12 }, // Empresa
+      { wch: 20 }, // Fecha/Hora
+      { wch: 18 }, // Predicción (GWh)
+      { wch: 18 }, // Creado por
+      { wch: 22 }, // Fecha de creación
+    ]
+
+    const workbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Predicciones')
+
+    const fileName = `predicciones_consumo_energetico_${new Date().toISOString().split('T')[0]}.xlsx`
+    XLSX.writeFile(workbook, fileName)
+  } catch (error) {
+    console.error('Error exporting to Excel:', error)
+    alert('Error al exportar a Excel. Intente nuevamente.')
+  }
+}
 
 
 const exportToPDF = async () => {
